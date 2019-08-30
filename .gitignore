@@ -1,0 +1,15 @@
+#Codeblocks
+*.cbp
+*.layout
+*.depend
+
+#Compiled files
+*.o
+bin/*
+
+#Images
+*.png
+*.jpg
+*.bmp
+*.tiff
+*.txt
