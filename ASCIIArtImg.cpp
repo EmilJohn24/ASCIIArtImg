@@ -5,7 +5,7 @@
 #include <cstdlib>
 int main(int argc, char **argv){
     //consider transferring everything to a class
-    CharSpitter *spitter;
+    CharSpitter *spitter = nullptr;
     std::string guide = "guide.txt";
     std::string img;
     int compression;
