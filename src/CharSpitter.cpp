@@ -1,10 +1,17 @@
 #include "CharSpitter.h"
 
+std::ostream& operator<<(std::ostream& out, CharSpitter& cs){
+    //provides no way to deterministically identify if the object is no longer spitting out anything
+    cs.spit(out);
+    return out;
+}
+
 CharSpitter::CharSpitter(std::string guide, std::string img, int _compression)
 {
     //ctor
     currCol = 0;
     currRow = 0;
+    imageContainer = nullptr;
     setCompressionFactor(_compression);
     openGuide(guide);
     openImage(img);
@@ -16,15 +23,6 @@ CharSpitter::~CharSpitter()
     delete imageContainer;
 }
 
-
-float CharSpitter::getCurrentPixelShading(){
-    //Color tmp(rgb[0], rgb[1], rgb[2]);
-    Color colorContainer = imageContainer->pixelColor(currCol, currRow);
-    ColorRGB rgb(colorContainer);
-    float averagePercent = rgb.red() + rgb.green() + rgb.blue() / 3.0;
-    return averagePercent;
-
-}
 
 float CharSpitter::getAreaPixelShading(){
     float sum = 0;

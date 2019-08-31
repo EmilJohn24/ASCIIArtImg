@@ -8,17 +8,17 @@
 #include <iostream>
 #include <math.h>
 using namespace Magick;
+
 class CharSpitter
 {
     public:
-        static const int MAX_PIXEL = 255;
+        friend std::ostream& operator<<(std::ostream&, CharSpitter&);
         CharSpitter(std::string guide, std::string img, int _compression = 5);
         virtual ~CharSpitter();
         void openGuide(std::string guide);
         void openImage(std::string img);
         int getGuiderCount(){ return palette.size(); }
         bool spit(std::ostream &out);
-        float getCurrentPixelShading();
         float getAreaPixelShading();
         void setCompressionFactor(int _factor){ compressionFactor = _factor; }
 
@@ -33,5 +33,10 @@ class CharSpitter
         int height;
         int compressionFactor;
 };
+
+std::ostream& operator<<(std::ostream &out, CharSpitter& cs);     //provides no way to deterministically identify if the object is no longer spitting out anything
+
+
+
 
 #endif // CHARSPITTER_H
