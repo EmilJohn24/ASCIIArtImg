@@ -11,16 +11,9 @@ CharSpitter::CharSpitter(std::string guide, std::string img, int _compression)
     //ctor
     currCol = 0;
     currRow = 0;
-    imageContainer = nullptr;
     setCompressionFactor(_compression);
     openGuide(guide);
     openImage(img);
-}
-
-CharSpitter::~CharSpitter()
-{
-    //dtor
-    delete imageContainer;
 }
 
 
@@ -29,7 +22,7 @@ float CharSpitter::getAreaPixelShading(){
     float average;
     for (int r = currRow; r != currRow + compressionFactor; r++){
         for (int c = currCol; c != currCol + compressionFactor; c++){
-                Color colorContainer = imageContainer->pixelColor(c, r);
+                Color colorContainer = imageContainer.pixelColor(c, r);
                 ColorGray gray(colorContainer);
                 float averagePercent = gray.shade();
                 sum += averagePercent;
@@ -66,9 +59,9 @@ void CharSpitter::openGuide(std::string guide){
 }
 
 void CharSpitter::openImage(std::string img){
-    imageContainer = new Image(img);
-    imageContainer->modifyImage();
+    imageContainer = Image(img);
+    imageContainer.modifyImage();
     //std::cout << imageContainer->magick() << std::endl;
-    width = imageContainer->columns();
-    height = imageContainer->rows();
+    width = imageContainer.columns();
+    height = imageContainer.rows();
 }

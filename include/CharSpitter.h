@@ -14,7 +14,6 @@ class CharSpitter
     public:
         friend std::ostream& operator<<(std::ostream&, CharSpitter&);
         CharSpitter(std::string guide, std::string img, int _compression = 5);
-        virtual ~CharSpitter();
         void openGuide(std::string guide);
         void openImage(std::string img);
         int getGuiderCount(){ return palette.size(); }
@@ -26,7 +25,7 @@ class CharSpitter
 
     private:
         std::string palette;
-        Image *imageContainer;
+        Image imageContainer;
         int currRow;
         int currCol;
         int width;
